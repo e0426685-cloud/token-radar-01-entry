@@ -15,7 +15,7 @@
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { boardIssue, buildRadar, dataScript, parseSnapshot } from './lib/model.ts';
+import { boardIssue, buildRadar, dataScript, MODEL_VERSION, parseSnapshot } from './lib/model.ts';
 import { buildDossier } from './vendor/makefun-board.ts';
 
 const repoDir = fileURLToPath(new URL('.', import.meta.url));
@@ -87,7 +87,7 @@ writeFileSync(
 );
 
 process.stdout.write(
-  `launch radar: ${snapshot.protocols.length} protocols scanned, ${radar.stats.pre_token} record no token, ` +
+  `launch radar: model ${MODEL_VERSION}; ${snapshot.protocols.length} protocols scanned, ${radar.stats.pre_token} record no token, ` +
     `${board.length} ranked (watchlist ${radar.stats.watchlist}/${radar.stats.watchlist} covered)\n` +
     `launch radar: wrote board.json, data.js, dashboard/ (${pageFiles.length} files), ` +
     `screenshots/ (${shots.length} images) and dossier.json under ${outDir}\n`,
